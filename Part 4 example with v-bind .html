@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.js Tutorial</title>
+
+</head>
+<body>
+<div id="app">
+    <h1 v-bind:title="title">{{message}}</h1>
+    <img :src="url" :alt="title" :title="title" /> <!-- чтобы постоянно не писать v-bind можно просто
+    писать :src, :alt, :title -->
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script> <!-- подключение vue -->
+
+<script>
+    // инициализация приложения vue
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello vue world',
+            title: "You loaded the page on " + new Date(),
+            url: "https://vuejs.org/images/logo.png"
+        }
+    })
+</script>
+</html> 

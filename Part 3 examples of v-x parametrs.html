@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.js Tutorial</title>
+
+</head>
+<body>
+<div id="app">
+    <h1 v-text="message"></h1>
+    <h1 v-html="intro"></h1> <!-- учитывает html теги в блоке-->
+    <h1 v-show="viewed">Текст который должен отобразиться</h1> <!-- в зависимости от значения viewed true или false будет
+    отображаться или не отображаться текст заключенный в тег-->
+    <h1 v-if="viewed">Аналог v-show</h1>
+    <h1 v-if="viewed == viewed2">Но позволяет выполнять более сложные условия</h1>
+    <h1 v-else>Иначе реализованное в Vue</h1>
+    <h1 v-pre>{{message}}</h1> <!-- не рендерить ничего в нутри-->
+    <h1 v-once>{{message}}</h1> <!-- Рендерить толкьо один раз, при динамическом изменении элемента уже не перерендерится-->
+    <h1 v-cloak>{{message}}</h1> <!-- Выдаст результат не законченного рендера элементов на одну секунду-->
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script> <!-- подключение vue -->
+
+<script>
+    // инициализация приложения vue
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello vue world',
+            intro: "Welcome to tutorial <small>it is all aboout Vue.js</small>",
+            viewed: true,
+            viewed2: true
+        }
+    })
+</script>
+</html> 
