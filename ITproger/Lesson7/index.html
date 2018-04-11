@@ -9,9 +9,9 @@
 <script src="https://unpkg.com/vue"></script>
 
 <div id="app">
-    <span v-on:onclick="title='текст1'">текст1</span><br>
-    <span v-on:mouseover="title='текст2'">текст2</span><br> <!-- при наведении на текст меняем title -->
-    <span v-on:mouseover="changeText">текст3</span>
+    <span v-on:click="title='текст1'">текст1</span><br>
+    <span @mouseover="title='текст2'">текст2</span><br> <!-- при наведении на текст меняем title -->
+    <span @mouseover="changeText">текст3</span>
     <p>{{ title }}</p>
     <p v-bind:class="styleCSS">Цвет: {{ styleCSS }}</p>
     <input type="text" v-on:input="styleCSS = $event.target.value" />
