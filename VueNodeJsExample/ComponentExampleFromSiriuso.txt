@@ -1,0 +1,76 @@
+<template>
+  <div>
+    <el-form :inline="true" :model="formInline" class="form-inline" v-if="false">
+      <el-form-item>
+        <el-select v-model="value" size="small" placeholder="Сортировка">
+          <el-option label="Новые" value="a"></el-option>
+          <el-option label="По имени" value="p"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-input size="small" placeholder="Поиск по товарищам" v-model="input10" clearable>
+        </el-input>
+      </el-form-item>
+    </el-form>
+    <div class="listo-container">
+      <div v-if="(!apiBuf.next)&&loading" style="text-align: center; width: 100%"><i class="el-icon-loading" style="font-size: 32px"></i></div>
+      <app-gekamarado-listo-ero v-for="item in items" v-bind:ero="item" v-bind:key="item.id" />
+    </div>
+    <el-button v-if="apiBuf.next" :loading="loading" @click="loadPage()" class="ankorau" type="primary" size="mini" plain>Показать больше товарищей</el-button>
+  </div>
+</template>
+
+<script>
+  import axios from 'axios';
+
+  export default {
+    name: "gekamarado-listo",
+    data() {
+      return {
+        items: {},
+        apiBuf: {},
+        loading: false,
+        url: "",
+        errors: []
+      };
+    },
+
+    methods: {
+      loadPage() {
+          this.loading = true;
+          axios.get(this.url)
+          .then(response => {
+            this.apiBuf = response.data;
+
+            for (let key in this.apiBuf.results) {
+              let item;
+              let id;
+              item = this.apiBuf.results[key];
+              id = item.id;
+              this.$set(this.items, id, item);
+            }
+
+            this.url = this.apiBuf.next;
+
+            this.loading = false;
+
+          })
+          .catch(e => {
+            this.errors.push(e);
+          })
+        }
+
+    },
+
+    created: function () {
+      this.url = this.apiUrl;
+      this.loadPage();
+    },
+
+    props: ['apiUrl']
+  };
+</script>
+
+<style scoped>
+
+</style>
