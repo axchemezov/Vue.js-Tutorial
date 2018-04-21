@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sample">
+            <!-- так работает v-model "под капотом"-->
+            <input type="text" 
+                   v-on:input="name = $event.target.value"
+                   v-bind:value="name"
+                   v-on:change="onChange"
+                   >
+            <input type="text"
+                   v-model:input="name"
+                   >
+            <hr>
+            <h2>Hello, {{ name }}</h2>
+        </div>
+    </div>
+    <script>
+        let sample = new Vue({
+            el: '.sample',
+            data: {
+                name: 'Default'
+            },
+            methods: {
+                onChange(e){ // в параметр e попадет эвент ($event)
+                    console.log(this);
+                    console.log(e.target);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
